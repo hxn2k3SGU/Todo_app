@@ -6,13 +6,7 @@ function Todo(){
         name: "",
     });
 
-    const [todoList, setTodoList] = useState([{
-        id: 1,
-        name: "Đánh răng rửa mặt",
-    },
-    {
-        id: 2,
-        name: "Đi học",    }]);
+    const [todoList, setTodoList] = useState([]);
 
     // Phần xử lý sự kiện 
     const handleGetTodo = (value) => {
@@ -40,6 +34,14 @@ function Todo(){
             }
         )
     }
+    // hàm xóa Todo
+    const handleDeleteTodo = (id) =>{
+        // console.log(id);
+        // setTodoList(todoList.filter(todo) => todo.id !== id);
+        setTodoList(todoList.filter((todo) => todo.id !== id));
+    }
+
+
 
     return(
         <div>
@@ -68,7 +70,22 @@ function Todo(){
                 <ul>
                     {todoList.map((todo, index)=>{
                         // return <li> {index}{todo.id} {todo.name} </li>
-                        return <li>{todo.name}</li>
+                        return <li key={index} >{todo.name}
+                        <button
+                                onClick={() => handleDeleteTodo(todo.id)}
+                                style={{
+                                    marginLeft: "10px",
+                                    backgroundColor: "red",
+                                    color: "white",
+                                    border: "none",
+                                    borderRadius: "4px",
+                                    padding: "4px 8px",
+                                    cursor: "pointer"
+                                }}
+                            >
+                                Xóa
+                            </button>
+                        </li>
                     })}
                 </ul>
             </div>
